@@ -19,7 +19,7 @@ The skeleton project has the following services
   - `updateSelf` action allows authenticated user to update his information
   - `list` action returns a list of users
 - **register**: Sample service with `signup` action to register new users.
-- - **projects**: Sample service
+- **projects**: Sample service
 
 ## Mixins
 - **db.mixin**: Database access mixin for services. Based on [moleculer-db](https://github.com/moleculerjs/moleculer-db#readme)
