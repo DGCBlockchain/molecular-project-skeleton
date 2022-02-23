@@ -5,21 +5,21 @@ This is a [Moleculer](https://moleculer.services/)-based microservices project. 
 
 ## Usage
 Start the project with `npm run dev` command. 
-After starting, open the http://localhost:3000/ URL in your browser. 
-On the welcome page you can test the generated services via API Gateway and check the nodes & services.
+After starting,
 
-In the terminal, try the following commands:
-- `nodes` - List all connected nodes.
-- `actions` - List all registered service actions.
-- `call greeter.hello` - Call the `greeter.hello` action.
-- `call greeter.welcome --name John` - Call the `greeter.welcome` action with the `name` parameter.
-- `call products.list` - List the products (call the `products.list` action).
+Default dev API endpoint http://localhost:3000/api/ for local testing. 
+The skeleton project has the following services
 
 
 ## Services
 - **api**: API Gateway services
-- **greeter**: Sample service with `hello` and `welcome` actions.
-- **products**: Sample DB service. To use with MongoDB, set `MONGO_URI` environment variables and install MongoDB adapter with `npm i moleculer-db-adapter-mongo`.
+- **auth**: Sample service with `login` and `resolve` actions.
+- **users**: Sample service  with 
+  - `me` action to get infomation about a logged in  and authenticated user
+  - `updateSelf` action allows authenticated user to update his information
+  - `list` action returns a list of users
+- **register**: Sample service with `signup` action to register new users.
+- - **projects**: Sample service
 
 ## Mixins
 - **db.mixin**: Database access mixin for services. Based on [moleculer-db](https://github.com/moleculerjs/moleculer-db#readme)

@@ -19,30 +19,58 @@ services:
     networks:
       - internal
 
-  greeter:
+  auth:
     build:
       context: .
     image: Molecular-Project-Skeleton
     env_file: docker-compose.env
     environment:
-      SERVICES: greeter
+      SERVICES: auth
     depends_on:
       - nats
+      - mongo
     networks:
       - internal
 
-  products:
+  projects:
     build:
       context: .
     image: Molecular-Project-Skeleton
     env_file: docker-compose.env
     environment:
-      SERVICES: products
+      SERVICES: projects
     depends_on:
       - mongo
       - nats
     networks:
       - internal
+
+  register:
+    build:
+      cont
+    image: Molecular-Project-Skeleton
+    env_file: docker-compose.env
+    environment:
+      SERVICES: register
+    depends_on:
+      - mongo
+      - nats
+    networks:
+      - internal
+
+  users:
+    build:
+      context: .
+    image: Molecular-Project-Skeleton
+    env_file: docker-compose.env
+    environment:
+      SERVICES: users
+    depends_on:
+      - mongo
+      - nats
+      - auth
+    networks:
+      - internal    
 
   mongo:
     image: mongo:4

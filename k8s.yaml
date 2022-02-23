@@ -83,61 +83,117 @@ spec:
 
 ---
 #########################################################
-# Greeter service
+# Auth service
 #########################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: greeter
+  name: auth
 spec:
   selector:
     matchLabels:
-      app: greeter
+      app: auth
   replicas: 2
   template:
     metadata:
       labels:
-        app: greeter
+        app: auth
     spec:
       containers:
-      - name: greeter
+      - name: auth
         image: Molecular-Project-Skeleton
         envFrom:
         - configMapRef:
             name: common-env
         env:
           - name: SERVICES
-            value: greeter
+            value: auth
 
 ---
 #########################################################
-# Products service
+# Projects service
 #########################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: products
+  name: projects
 spec:
   selector:
     matchLabels:
-      app: products
+      app: projects
   replicas: 2
   template:
     metadata:
       labels:
-        app: products
+        app: projects
     spec:
       containers:
-      - name: products
+      - name: projects
         image: Molecular-Project-Skeleton
         envFrom:
         - configMapRef:
             name: common-env
         env:
           - name: SERVICES
-            value: products
+            value: projects
 
 ---
+#########################################################
+# Registeration service
+#########################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: register
+spec:
+  selector:
+    matchLabels:
+      app: register
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: register
+    spec:
+      containers:
+      - name: register
+        image: Molecular-Project-Skeleton
+        envFrom:
+        - configMapRef:
+            name: common-env
+        env:
+          - name: SERVICES
+            value: register
+
+---
+#########################################################
+# Users service
+#########################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+spec:
+  selector:
+    matchLabels:
+      app: user
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: user
+        image: Molecular-Project-Skeleton
+        envFrom:
+        - configMapRef:
+            name: common-env
+        env:
+          - name: SERVICES
+            value: user
+
+---             
 #########################################################
 # MongoDB server
 #########################################################
