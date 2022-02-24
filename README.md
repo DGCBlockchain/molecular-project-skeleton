@@ -7,7 +7,7 @@ This is a [Moleculer](https://moleculer.services/)-based microservices project. 
 Start the project with `npm run dev` command. 
 After starting,
 
-Default dev API endpoint http://localhost:3000/api/ for local testing. 
+Default dev API url http://localhost:3000/api/ for local testing. 
 The skeleton project has the following services
 
 

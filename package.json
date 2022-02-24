@@ -13,8 +13,7 @@
     "dc:logs": "docker-compose logs -f",
     "dc:down": "docker-compose down",
     "lint-services": "npx eslint --fix services/**/*.js",
-    "lint-tests": "npx eslint --fix test/**/*.js",
-    "prepare": "husky install"
+    "lint-tests": "npx eslint --fix test/**/*.js"
   },
   "keywords": [
     "microservices",

@@ -1,0 +1,84 @@
+name: Build
+
+on:
+  push:
+    # branches: TODO: comment back in
+    #   - master
+  create:
+    tags:
+      - v*
+
+jobs:
+  build:
+    name: Build image
+    runs-on: ubuntu-latest
+
+    env:
+      # HASH: $(git rev-parse --short "$GITHUB_SHA")
+      # BRANCH: ${GITHUB_REF##*/}
+      SERVICE_NAME: ${{ github.event.repository.name }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      REGION: europe-west3
+      # GKE_CLUSTER: waterfall
+      # DEPLOYMENT_NAME_DEV: deployment/swagger-api-dev-deployment
+      # DEPLOYMENT_NAME_PROD: deployment/swagger-api-prod-deployment
+      # CONTAINER: waterfallapi 
+      
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Setup gcloud CLI
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ secrets.PROJECT_ID }}
+          export_default_credentials: true
+
+      - name: Set env
+        id: gen_tags
+        run: |
+          if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
+            echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          else
+            echo "RELEASE_VERSION=${GITHUB_SHA}" >> $GITHUB_ENV
+          fi
+          
+        # run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+
+     # Build and push docker image
+
+      # - name: Build
+      #   run: |-
+      #      if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
+      #        docker build -t eu.gcr.io/$PROJECT_ID/prod/$SERVICE_NAME:$RELEASE_VERSION .
+      #      else
+      #        docker build -t eu.gcr.io/$PROJECT_ID/dev/$SERVICE_NAME:$RELEASE_VERSION .
+      #      fi
+      # Configure docker to use the gcloud command-line tool as a credential helper
+      - run: |
+          gcloud auth configure-docker -q
+      # Push image to Google Container Registry
+      - name: Push
+        run: |-
+          if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
+             docker-compose push eu.gcr.io/$PROJECT_ID/prod/$SERVICE_NAME:$RELEASE_VERSION --build -d
+          else
+             docker-compose push eu.gcr.io/$PROJECT_ID/dev/$SERVICE_NAME:$RELEASE_VERSION --build -d
+          fi
+      # # Get the GKE credentials so we can deploy to the cluster
+      # - uses: google-github-actions/get-gke-credentials@v0.3.0
+      #   with:
+      #     cluster_name: ${{ env.GKE_CLUSTER }}
+      #     location: ${{ env.REGION }}
+      #     credentials: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
+        
+      # - name: deploy
+      #   run: |-
+      #    if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
+      #        kubectl set image ${{ env.DEPLOYMENT_NAME_PROD }} ${{ env.CONTAINER }}="eu.gcr.io/$PROJECT_ID/prod/$SERVICE_NAME:$RELEASE_VERSION" --namespace="prod"
+      #     else
+      #        kubectl set image ${{ env.DEPLOYMENT_NAME_DEV }} ${{ env.CONTAINER }}="eu.gcr.io/$PROJECT_ID/dev/$SERVICE_NAME:$RELEASE_VERSION" --namespace="dev"
+      #     fi

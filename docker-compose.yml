@@ -5,7 +5,7 @@ services:
   api:
     build:
       context: .
-    image: Molecular-Project-Skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: api
@@ -22,7 +22,7 @@ services:
   auth:
     build:
       context: .
-    image: Molecular-Project-Skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: auth
@@ -35,7 +35,7 @@ services:
   projects:
     build:
       context: .
-    image: Molecular-Project-Skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: projects
@@ -47,8 +47,8 @@ services:
 
   register:
     build:
-      cont
-    image: Molecular-Project-Skeleton
+      context: .
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: register
@@ -61,7 +61,7 @@ services:
   users:
     build:
       context: .
-    image: Molecular-Project-Skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: users
