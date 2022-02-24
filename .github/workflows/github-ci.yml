@@ -16,7 +16,7 @@ jobs:
     env:
       # HASH: $(git rev-parse --short "$GITHUB_SHA")
       # BRANCH: ${GITHUB_REF##*/}
-      SERVICE_NAME: ${{ github.event.repository.name }}
+      SERVICE_NAME: molecular-skeleton-project
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
       REGION: europe-west3
       # GKE_CLUSTER: waterfall
