@@ -5,7 +5,7 @@ services:
   api:
     build:
       context: .
-    image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: api
@@ -22,7 +22,7 @@ services:
   auth:
     build:
       context: .
-    image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: auth
@@ -35,7 +35,7 @@ services:
   projects:
     build:
       context: .
-    image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: projects
@@ -48,7 +48,7 @@ services:
   register:
     build:
       context: .
-    image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: register
@@ -61,7 +61,7 @@ services:
   users:
     build:
       context: .
-    image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton
+    image: molecular-project-skeleton
     env_file: docker-compose.env
     environment:
       SERVICES: users
@@ -73,7 +73,7 @@ services:
       - internal    
 
   mongo:
-    image: eu.gcr.io/fantom-305707/dev/mongo:4
+    image: mongo:4
     volumes:
       - data:/data/db
     networks:
@@ -85,7 +85,7 @@ services:
       - internal
 
   traefik:
-    image: eu.gcr.io/fantom-305707/dev/traefik:v2.1
+    image: traefik:v2.1
     command:
       - "--api.insecure=true" # Don't do that in production!
       - "--providers.docker=true"

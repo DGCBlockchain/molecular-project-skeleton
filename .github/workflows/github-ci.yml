@@ -50,30 +50,30 @@ jobs:
 
      # Build and push docker image
 
-      # - name: Build
-      #   run: |-
-      #      if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
-      #        docker build -t eu.gcr.io/$PROJECT_ID/prod/$SERVICE_NAME:$RELEASE_VERSION .
-      #      else
-      #        docker build -t eu.gcr.io/$PROJECT_ID/dev/$SERVICE_NAME:$RELEASE_VERSION .
-      #      fi
+      - name: Build
+        run: |-
+           if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
+             docker compose -f docker-compose.yml build -t eu.gcr.io/fantom-305707/prod/$SERVICE_NAME:$RELEASE_VERSION .
+           else
+             docker compose -f docker-compose.yml build -t eu.gcr.io/fantom-305707/dev/$SERVICE_NAME:$RELEASE_VERSION .
+           fi
       # Configure docker to use the gcloud command-line tool as a credential helper
       - run: |
           gcloud auth configure-docker -q
       # Push image to Google Container Registry
       - name: Push
-        run: |-
-          if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
-             docker-compose push
-          else
-             docker-compose push
-          fi
         # run: |-
         #   if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
-        #      docker-compose push eu.gcr.io/fantom-305707/prod/$SERVICE_NAME:$RELEASE_VERSION --build -d
+        #      docker-compose push
         #   else
-        #      docker-compose push eu.gcr.io/fantom-305707/dev/$SERVICE_NAME:$RELEASE_VERSION --build -d
+        #      docker-compose push
         #   fi
+        run: |-
+          if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
+             docker compose -f docker-compose.yml push eu.gcr.io/fantom-305707/prod/$SERVICE_NAME:$RELEASE_VERSION 
+          else
+             docker compose -f docker-compose.yml push eu.gcr.io/fantom-305707/dev/$SERVICE_NAME:$RELEASE_VERSION
+          fi
       # # Get the GKE credentials so we can deploy to the cluster
       # - uses: google-github-actions/get-gke-credentials@v0.3.0
       #   with:
