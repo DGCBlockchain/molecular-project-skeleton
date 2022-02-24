@@ -32,9 +32,9 @@ jobs:
       # Setup gcloud CLI
       - uses: google-github-actions/setup-gcloud@v0
         with:
-          credentials_json: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
-          project_id: ${{ secrets.PROJECT_ID }}
-          export_default_credentials: true
+          service_account_key: ${{ secrets.GCR_DEVOPS_SERVICE_ACCOUNT_KEY }}
+          # project_id: ${{ secrets.PROJECT_ID }}
+          # export_default_credentials: true
 
       - name: Set env
         id: gen_tags
@@ -64,9 +64,9 @@ jobs:
       - name: Push
         run: |-
           if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
-             docker-compose push eu.gcr.io/fantom/prod/$SERVICE_NAME:$RELEASE_VERSION --build -d
+             docker-compose push eu.gcr.io/$PROJECT_ID/prod/$SERVICE_NAME:$RELEASE_VERSION --build -d
           else
-             docker-compose push eu.gcr.io/fantom/dev/$SERVICE_NAME:$RELEASE_VERSION --build -d
+             docker-compose push eu.gcr.io/$PROJECT_ID/dev/$SERVICE_NAME:$RELEASE_VERSION --build -d
           fi
       # # Get the GKE credentials so we can deploy to the cluster
       # - uses: google-github-actions/get-gke-credentials@v0.3.0
