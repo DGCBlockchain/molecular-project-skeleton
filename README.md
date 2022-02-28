@@ -42,3 +42,4 @@ The skeleton project has the following services
 - `npm run dc:down`: Stop the stack with Docker Compose
 
 ## run pipeline
+sd
