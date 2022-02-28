@@ -1,11 +1,13 @@
 #cloudbuild.yaml
 steps:
+# Build the new docker image.
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA:latest', '.']
+  
 - name: 'docker/compose:1.19.0'
-  args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA', '.']
-# Push the container image to Container Registry
-- name: 'docker/compose:1.19.0'
-  args: ['push', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
-#   args: ['up', '-d']
-# - name: 'eu.gcr.io/cloud-builders/docker'
-#   args: ['tag', 'molecular_app:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
+  args: ['up', '-d']
+
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: ['tag', 'molecular:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
+# Push the new image to the registry.
 images: ['eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
