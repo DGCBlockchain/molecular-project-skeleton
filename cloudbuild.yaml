@@ -2,6 +2,6 @@
 steps:
 - name: 'docker/compose:1.19.0'
   args: ['up', '-d']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['tag', 'workspace_app:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
+- name: 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME'
+  args: ['tag', 'molecular_app:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
 images: ['eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
