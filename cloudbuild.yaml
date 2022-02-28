@@ -2,12 +2,12 @@
 steps:
 # Build the new docker image.
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA:latest', '.']
-  
+  args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME/$REPO_NAME:$COMMIT_SHA:latest', '.']
+
 - name: 'docker/compose:1.19.0'
   args: ['up', '-d']
 
 # - name: 'gcr.io/cloud-builders/docker'
-#   args: ['tag', 'molecular:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
+#   args: ['tag', 'molecular:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME/$REPO_NAME:$COMMIT_SHA']
 # Push the new image to the registry.
 images: ['eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:$COMMIT_SHA']
