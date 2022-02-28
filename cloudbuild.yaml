@@ -7,15 +7,21 @@ steps:
 # - name: 'gcr.io/cloud-builders/docker'
 #   args: ['tag', 'workspace_app:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME/$REPO_NAME:$COMMIT_SHA']
 
-- name: 'docker/compose:1.19.0'
-  args: ['up', '-d']
+# - name: 'docker/compose:1.19.0'
+#   args: ['up', '-d']
+
+  args: ['-f', 'docker-compose-cloud.yml', 'build', '-d']
+  env:
+    - 'PROJECT_ID=$PROJECT_ID'
+    -  'REPO_NAME=$REPO_NAME'
+    - '_ENV=$_ENV'
 
 # - name: 'gcr.io/cloud-builders/docker'
 #   args: ['tag', 'molecular:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME/$REPO_NAME:$COMMIT_SHA']
 # Build the new docker image.
 # - name: 'docker'
 #   args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:latest', '.']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['tag', 'molecular-project-skeleton:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:latest']
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: ['tag', 'molecular-project-skeleton:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:latest']
 # Push the new image to the registry.
 images: ['eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME:latest']
