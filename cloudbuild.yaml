@@ -5,7 +5,7 @@ steps:
 #   args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME/$REPO_NAME:$COMMIT_SHA:latest', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['tag', 'molecular:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME/$REPO_NAME:$COMMIT_SHA']
+  args: ['tag', 'workspace_app:latest', 'eu.gcr.io/$PROJECT_ID/$_ENV/$REPO_NAME/$REPO_NAME:$COMMIT_SHA']
 
 - name: 'docker/compose:1.19.0'
   args: ['up', '-d']
