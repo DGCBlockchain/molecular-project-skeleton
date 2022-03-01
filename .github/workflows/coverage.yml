@@ -1,12 +1,12 @@
-name: Run Tests and Lint Files
+name: Coverage
 
 on:
-  pull_request:
   push:
+  pull_request:
 
 jobs:
-  lint:
-    name: Test-Lint
+  coverage:
+    name: Coverage
     runs-on: ubuntu-latest
 
     steps:
@@ -27,8 +27,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm i
 
-      - name: Run lint
-        run: npm run lint
-
-      - name: Run unit tests
-        run: npm test
+      - name: Run covergae
+        run: npm run coverage
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          version: "v0.1.15"

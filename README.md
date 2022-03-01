@@ -1,6 +1,6 @@
 [![Moleculer](https://badgen.net/badge/Powered%20by/Moleculer/0e83cd)](https://moleculer.services)
-[![Tests](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yaml/badge.svg)](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yaml)
-
+[![Tests](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yml/badge.svg)](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/DGCBlockchain/molecular-project-skeleton/branch/main/graph/badge.svg?token=BLUUNJUJC1)](https://codecov.io/gh/DGCBlockchain/molecular-project-skeleton)
 # Molecular-Project-Skeleton
 This is a [Moleculer](https://moleculer.services/)-based microservices project. Generated with the [Moleculer CLI](https://moleculer.services/docs/0.14/moleculer-cli.html).
 
@@ -42,5 +42,11 @@ The skeleton project has the following services
 - `npm run dc:up`: Start the stack with Docker Compose
 - `npm run dc:down`: Stop the stack with Docker Compose
 
-## run pipeline
-sd
+## forking this repo
+Fork this repo for your projects and set the following repo secrets in the new repo
+- `CODECOV_TOKEN`: used by coverage workflow to upload coverage report
+- `PROJECT_ID`: used by docker worfklow, it is project id for your gcr
+- `GCR_DEVOPS_SERVICE_ACCOUNT_KEY`: service account key that  grants access to your private gcr
+
+## coverage 
+Default test coverage threshold for this template is set to 75%. This can be adjusted in the .codecov.yml file 
