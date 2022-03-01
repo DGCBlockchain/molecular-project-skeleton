@@ -2,8 +2,8 @@ name: Build
 
 on:
   push:
-    # branches: TODO: comment back in
-    #   - master
+    branches:
+      - main
   create:
     tags:
       - v*
