@@ -1,5 +1,5 @@
 [![Moleculer](https://badgen.net/badge/Powered%20by/Moleculer/0e83cd)](https://moleculer.services)
-[![Tests](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yml/badge.svg)](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yml)
+[![Tests](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yaml/badge.svg)](https://github.com/DGCBlockchain/molecular-project-skeleton/actions/workflows/test.yaml)
 
 # Molecular-Project-Skeleton
 This is a [Moleculer](https://moleculer.services/)-based microservices project. Generated with the [Moleculer CLI](https://moleculer.services/docs/0.14/moleculer-cli.html).
