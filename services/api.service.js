@@ -57,7 +57,7 @@ module.exports = {
 				 * @param {ServerResponse} res 
 				 * @param {Object} data
 				 *  */
-				onBeforeCall(ctx, req) {
+				onBeforeCall(ctx, route, req, res) {
 					// Set request headers to context meta
 					ctx.meta.jwt = req.headers.jwt;
 				}, 
