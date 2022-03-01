@@ -1,5 +1,5 @@
 {
-  "name": "Molecular-Project-Skeleton",
+  "name": "molecular-project-skeleton",
   "version": "1.0.0",
   "description": "My Moleculer-based microservices project",
   "scripts": {
@@ -24,6 +24,7 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-import": "^2.25.4",
     "husky": "^7.0.4",
     "jest": "^27.1.0",
     "jest-cli": "^27.1.0",
