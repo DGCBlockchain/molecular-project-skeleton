@@ -18,7 +18,7 @@ data:
   
   
   
-  MONGO_URI: mongodb://mongo/Molecular-Project-Skeleton
+  MONGO_URI: mongodb://mongo/molecular-project-skeleton
 
 ---
 #########################################################
@@ -39,19 +39,22 @@ spec:
 #########################################################
 # Ingress for Moleculer API Gateway
 #########################################################
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
 spec:
   rules:
-  - host: Molecular-Project-Skeleton.127.0.0.1.nip.io
+  - host: molecular-project-skeleton.127.0.0.1.nip.io
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: api
-          servicePort: 3000
+          service:
+            name: api
+            port:
+              number: 3000
 
 ---
 #########################################################
@@ -73,7 +76,8 @@ spec:
     spec:
       containers:
       - name: api
-        image: Molecular-Project-Skeleton
+        image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton:latest
+        # image: eu.gcr.io/$PROJECT_ID/$_ENV/molecular-project-skeleton:latest
         envFrom:
         - configMapRef:
             name: common-env
@@ -101,7 +105,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: Molecular-Project-Skeleton
+        image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton:latest
         envFrom:
         - configMapRef:
             name: common-env
@@ -129,7 +133,7 @@ spec:
     spec:
       containers:
       - name: projects
-        image: Molecular-Project-Skeleton
+        image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton:latest
         envFrom:
         - configMapRef:
             name: common-env
@@ -157,7 +161,7 @@ spec:
     spec:
       containers:
       - name: register
-        image: Molecular-Project-Skeleton
+        image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton:latest
         envFrom:
         - configMapRef:
             name: common-env
@@ -185,7 +189,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: Molecular-Project-Skeleton
+        image: eu.gcr.io/fantom-305707/dev/molecular-project-skeleton:latest
         envFrom:
         - configMapRef:
             name: common-env

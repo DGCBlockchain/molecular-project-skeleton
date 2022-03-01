@@ -61,6 +61,7 @@ module.exports = {
 				 *  */
 				onBeforeCall(ctx, route, req, res) {
 					// Set request headers to context meta
+					console.log('onBeforeCall called');
 					ctx.meta.jwt = req.headers.jwt;
 				}, 
 
@@ -124,6 +125,7 @@ module.exports = {
 		async authenticate(ctx, route, req) {
 			// Read the token from header
 			const auth = req.headers.authorization;
+			console.log('----------- authenticate called -----------');
 
 			if (auth && auth.startsWith("Basic")) {
 				console.log(auth);
@@ -177,6 +179,7 @@ module.exports = {
 		async authorize(ctx, route, req) {
 			// this.logger.info("Authenticated via JWT: ", user.username);
 			// Get the authenticated user.
+			console.log('----------- authorize called -----------');
 			const {user} = ctx.meta;
 
 			// It check the `role` property in action schema.
