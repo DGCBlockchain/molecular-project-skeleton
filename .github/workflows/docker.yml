@@ -59,5 +59,5 @@ jobs:
           if [[ $GITHUB_REF == 'refs/tags/'* ]]; then
              docker push eu.gcr.io/$PROJECT_ID/prod/$SERVICE_NAME:$RELEASE_VERSION
           else
-             docker eu.gcr.io/$PROJECT_ID/dev/$SERVICE_NAME:$RELEASE_VERSION
+             docker push eu.gcr.io/$PROJECT_ID/dev/$SERVICE_NAME:$RELEASE_VERSION
           fi
