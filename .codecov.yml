@@ -1,0 +1,12 @@
+github_checks:
+  annotations: false
+coverage:
+  range: "70...100"
+  status:
+    patch:
+      default:
+        target: 75%
+    project:
+      default:
+        target: 75%
+        threshold: 1%
